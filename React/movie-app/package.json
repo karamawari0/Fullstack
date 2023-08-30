@@ -3,13 +3,31 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.14.6",
+    "@mui/x-date-pickers": "^6.11.2",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^29.5.4",
+    "@types/node": "^20.5.6",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
     "axios": "^1.4.0",
+    "bootstrap": "^5.3.1",
+    "bootstrap-icons": "^1.10.5",
+    "range-slider-input": "^2.4.4",
     "react": "^18.2.0",
+    "react-bootstrap": "^2.8.0",
+    "react-bootstrap-range-slider": "^3.0.8",
     "react-dom": "^18.2.0",
+    "react-flexbox-grid": "^2.1.2",
+    "react-hot-toast": "^2.4.1",
+    "react-range-slider-input": "^3.0.7",
     "react-scripts": "5.0.1",
+    "react-slider": "^2.0.6",
+    "react-spinners": "^0.13.8",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -35,5 +53,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
   }
 }
