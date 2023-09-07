@@ -75,7 +75,7 @@ const AddMovieComponent = ({ changeMovieCallback }) => {
 
     return (
         <div className="d-flex">
-            <div className="card bg-success m-3 col text-white" style={{ width: 'clamp(14rem, 16rem, 20rem)', height: 'clamp(20rem, 22rem, 25rem);' }}>
+            <div className="card bg-success m-3 col text-white" style={{ width: 'clamp(14rem, 16rem, 20rem)', height: 'clamp(20rem, 22rem, 25rem)' }}>
                 <div className="card-body">
                     <h5 className="card-title">ADD NEW</h5>
                     <br />
@@ -114,7 +114,7 @@ const AddMovieComponent = ({ changeMovieCallback }) => {
                                     <label htmlFor="description">Описание</label>
                                 </div>
 
-                                <h5>Duration {finish}</h5>
+                                <h5>Длительность: {finish}</h5>
 
                                 <RangeSlider
                                     onInput={(value) => { setFinish(fancyTimeFormat(value[1])); setValue(value) }}

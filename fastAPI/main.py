@@ -31,24 +31,27 @@ app.add_middleware(
 )
 
 
-class Movie(BaseModel):
-    title: str = Field(min_length=1)
-    author: str = Field(min_length=1)
-    description: str = Field(min_length=1)
-    duration: float = Field(gt=-1)
-    isDone: Optional[bool] = Field(None, nullable=True)
+class MovieBase(BaseModel):
+    title: str
+    author: str
+    description: str
+    duration: float
+
+    isDone: Optional[bool]
 
 
-class MovieTransaction(BaseModel):
+class MovieTransaction(MovieBase):
     id: int
 
     class Config:
         orm_mode = True
 
 
-@app.get("/movies/", response_model=List[Movie])
+@app.get("/movies/", response_model=List[MovieTransaction])
 async def get_all(db: db_dependency, skip: int = 0, limit: int = 100):
-    return db.query(model.Movies).order_by(model.Movies.id.desc()).limit(limit)
+    all_movies = db.query(model.Movies).order_by(
+        model.Movies.id.desc()).limit(limit)
+    return all_movies
 
 
 @app.get("/movies/{movie_id}")
@@ -62,38 +65,17 @@ async def get_by_ID(movie_id: int, db: db_dependency):
     return movie
 
 
-@app.post("/create_movie/")
-async def create_movie(movie: Movie, db: Session = Depends(get_db)):
-    movie_model = model.Movies()
-    movie_model.title = movie.title
-    movie_model.author = movie.author
-    movie_model.description = movie.description
-    movie_model.duration = movie.duration
-    movie_model.isDone = movie.isDone
-    db.add(movie_model)
+@app.post("/create_movie/", response_model=MovieTransaction)
+async def create_movie(movie: MovieBase, db: Session = Depends(get_db)):
+    db_transaction = model.Movies(**movie.dict())
+    db.add(db_transaction)
     db.commit()
-    return movie
-
-
-@app.put("create/{movie_id}")
-async def update_movie(movie_id: int, movie: Movie, db: db_dependency):
-    movie_model = db.query(model.Movies).filter(
-        model.Movies.id == movie_id).first()
-
-    if movie_model is None:
-        raise HTTPException(
-            status_code=404,
-            detail=f'ID{movie_id}: Да нет такого епт'
-        )
-    movie_model.duration = movie.duration
-
-    db.add(movie_model)
-    db.commit()
-    return movie
+    db.refresh(db_transaction)
+    return db_transaction
 
 
 @app.delete("/delete/{movie_id}")
-async def delete_movie(movie_id: int, movie: Movie, db: Session = Depends(get_db)):
+async def delete_movie(movie_id: int, movie: MovieTransaction, db: Session = Depends(get_db)):
     movie_model = db.query(model.Movies).filter(
         model.Movies.id == movie_id).first()
 

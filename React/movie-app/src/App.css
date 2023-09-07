@@ -36,6 +36,12 @@
   box-shadow: 0 0 0 9999px rgba(255, 255, 255, 0.75);
 }
 
+
+
+#range-slider:before:hover {
+  background-color: yellow;
+}
+
 .range-slider .range-slider__thumb[data-active] {
   transform: translate(-50%, -50%) scale(1.1);
 }

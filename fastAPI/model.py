@@ -11,4 +11,6 @@ class Movies(Base):
     author = Column(String)
     description = Column(String)
     duration = Column(Float)
+    targetLanguage = Column(String)
+    sourceLanguage = Column(String)
     isDone = Column(Boolean, default=False)
