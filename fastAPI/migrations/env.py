@@ -1,4 +1,4 @@
-from database import Base
+from database import Base, User
 from model import Movies
 from logging.config import fileConfig
 

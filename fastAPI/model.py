@@ -2,7 +2,6 @@ from pydantic import BaseModel
 from sqlalchemy import Column, Integer, String, Float, Boolean
 from database import Base
 
-
 class Movies(Base):
     __tablename__ = "movies"
 
